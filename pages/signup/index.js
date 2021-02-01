@@ -1,17 +1,16 @@
 import Layout from "../../components/layout/Layout";
 import HomePage from "../../components/home/HomePage";
 import Login from "../../components/login/Login";
-import styles from '../signup/signup.module.css'
+import styles from './signup.module.css'
 import {AiFillFacebook, AiOutlineShoppingCart} from "react-icons/ai";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import axios from 'axios'
-import jwt from "jsonwebtoken";
 
 export default function (){
     const router = useRouter()
     const [email,setEmail ] = useState("")
+    const [name,setName ] = useState("")
     const [password,setPassword ] = useState("")
     const [message,setMessage ] = useState("")
     const [errors , setErrors ] = useState({});
@@ -30,13 +29,13 @@ export default function (){
     },[errors])
     const createUser= async ()=>{
         try {
-            const res = await fetch('/api/login' , {
+            const res = await fetch('/api/signup' , {
                 method : "POST",
                 headers :{
                     "accept" : "application/json",
                     "Content-type" :"application/json"
                 },
-                body : JSON.stringify({email,password})
+                body : JSON.stringify({email,password,name})
             }).then(t => t.json())
             const {data} = res;
             if(data){
@@ -46,6 +45,7 @@ export default function (){
                 },2000)
             }else {
                 setMessage(res.message)
+
             }
 
         }catch(error) {
@@ -62,10 +62,12 @@ export default function (){
         if (errs.password){
             setMessage(errors.password)
         }
-
+        if (errs.name){
+            setMessage(errors.name)
+        }
         setIsSubmitting(true);
     }
-     const validate =( )=> {
+    const validate =( )=> {
         let err = {}
         if(!email ){
             err.email = "email is required";
@@ -73,7 +75,9 @@ export default function (){
         if(!password){
             err.password = " password is required";
         }
-
+        if(!name){
+            err.name = " name is required";
+        }
         return err;
     }
     return(
@@ -90,7 +94,7 @@ export default function (){
                     </div>
                     <div className={styles.body}>
                         { message ? <div className={styles.message}>{message}</div> : null}
-                        <form >
+                        <form  >
                             <button className={styles.fb_login}>
                                 <div className={styles.icon}>
                                     <AiFillFacebook />
@@ -99,6 +103,9 @@ export default function (){
                                     continue with facebook
                                 </div>
                             </button>
+                              <div className={styles.form_item}>
+                                    <input type="text" name="name" placeholder="Username"  onChange={e => setName(e.target.value)}/>
+                                </div>
                             <div className={styles.form_item}>
                                 <input type="text" name="email" placeholder="email"  onChange={e => setEmail(e.target.value)}/>
                             </div>
