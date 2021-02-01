@@ -1,0 +1,93 @@
+.container{
+    position: absolute;
+    width: 400px;
+    max-width: 100%;
+    min-height: 550px;
+    background-color: white;
+    top: 10%;
+    left: 5%;
+    text-align: center;
+    padding: 30px 0;
+    border-radius: 3px;
+}
+.head{
+    height: 60px;
+}
+.logo{
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+.logo_img{
+    font-size: 40px;
+}
+.body{
+    max-width: 80%;
+    margin: auto;
+}
+.fb_login{
+
+    display: flex;
+    height: 40px;
+    text-align: center;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    background-color: #45a1ff;
+    color: white;
+    border: none;
+    font-size: 18px;
+    text-transform: capitalize;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 3px;
+}
+.fb_login div{
+    color: white!important;
+}
+.btn_title{
+padding-right: 30px;
+}
+.icon{
+    font-size: 30px;
+    display: flex;
+}
+.form_item{
+    width: 100%;
+}
+.message{
+    padding: 10px;
+    height: 60px;
+
+}
+.form_item input,
+.form_item button,
+.fb_login{
+    margin: 5px 0px;
+    border-radius: 3px;
+    border: 1px solid #eee;
+    width: 100%;
+    outline: none;
+}
+.form_item input{
+    padding: 10px;
+}
+.form_item button{
+    height: 40px;
+    margin: 5px 0;
+    background-color: black;
+    color: white;
+}
+.p_small{
+    text-align: left;
+    padding: 10px 0;
+    color: #737373;
+}
+.p_larg{
+    font-size: 16px;
+    text-align: left;
+    padding: 10px 0;
+}
