@@ -25,7 +25,6 @@ export default function ({country}){
         getBorders();
 
     }, [])
-    console.log(borders)
     const handleShowMe =(e)=> {
         const big = document.getElementById("big_photo")
         big.src = e.target.src
