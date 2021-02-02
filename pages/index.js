@@ -6,33 +6,36 @@ import Layout from "../components/layout/Layout";
 import Aside from "../components/asidebar/Asidebar";
 import {useRouter} from "next/router";
 import {useEffect} from "react";
-
+import React from 'react'
+import {signIn , signOut , useSession} from 'next-auth/client';
 export default function Home() {
-  const [auth , setAuth] = useState(false)
+  const [session , loading] = useSession()
   const router = useRouter()
   function takeMeHome(){
     router.push('/online')
   }
   useEffect(()=> {
-    if (auth){
-      takeMeHome()
-    }
-    else {
-    router.push('/login')
-    }
+
   })
 
   return (
-    <div >
-
           <Layout>
             <div className={styles.container}>
-              normal home page
+              {!session  && (
+                  <>
+                  Notsigned in
+                      <button onClick={signIn}>Sign in</button>
+                  </>
+              )}
+                {session  && (
+                    <>
+                        signed in as {session.user.email}
+                        <br/>
+                        <div>you can see the protect route</div>
+                        <button onClick={signOut}>Sign out</button>
+                    </>
+                )}
             </div>
           </Layout>
-
-
-
-    </div>
   )
 }

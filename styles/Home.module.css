@@ -1,5 +1,9 @@
 .container{
-    top: 100px;
+    /*top: 100px;*/
     min-height: 100vh;
     z-index: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
