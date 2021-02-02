@@ -1,13 +1,10 @@
 import Layout from "../../components/layout/Layout";
-import HomePage from "../../components/home/HomePage";
-import Login from "../../components/login/Login";
 import styles from '../signup/signup.module.css'
 import {AiFillFacebook, AiOutlineShoppingCart} from "react-icons/ai";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import axios from 'axios'
-import jwt from "jsonwebtoken";
+
 
 export default function (){
     const router = useRouter()
@@ -39,8 +36,9 @@ export default function (){
                 body : JSON.stringify({email,password})
             }).then(t => t.json())
             const {data} = res;
-            if(data){
-                setMessage("welcome " + data.name)
+            console.log(res)
+            if(res.token){
+                setMessage("welcome " + res.name)
                 setTimeout(()=> {
                     router.push('/online')
                 },2000)

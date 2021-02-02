@@ -14,23 +14,20 @@ export default async (req, res) => {
                 res.status(400).json({success:false , message : "the email and the password are required" })
                 return;
             }
-            try {
-                let user = await User.findOne({
-                    email : req.body.email
+            let user = await User.findOne({
+                email: req.body.email,
+            });
+            let isMatch = await user.comparePassword(req.body.password);
+            if (isMatch) {
+                res.send({
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                    token: getToken(user),
                 });
-                if(user){
-                    let isMatch =await user.comparePassword(req.body.password);
-                    if(isMatch){
-                       const token = getToken(user)
-                        res.status(200).json({success : true , data: user , token :token ,  })
-                    }else {
-                        res.status(400).json({success: false , message : "invalid email or password "});
-                    }
-                }else {
-                    res.status(400).json({success: false , message : "invalid email or password "});
-                }
-            } catch (e) {
-                res.status(400).json({success: false , message : e.message});
+            } else {
+                res.status(401).send({ message: "invalid Email or Password" });
             }
             break;
         default :

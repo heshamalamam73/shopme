@@ -11,14 +11,25 @@ export default async (req, res) => {
     switch (method) {
         case "POST" :
             try {
-                const user = await User.create(req.body);
-                if (user) {
-                    res.status(201).json({success: true, data: user, token: getToken(user)})
+                const user = new User({
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password,
+                });
+                const newUser = await user.save();
+                if (newUser) {
+                    res.send({
+                        _id: newUser._id,
+                        name: newUser.name,
+                        email: newUser.email,
+                        isAdmin: newUser.isAdmin,
+                        token: getToken(newUser),
+                    });
                 } else {
-                    res.status(400).json({success: false, message: "invalid Email / username "})
+                    res.status(401).send({ msg: "invalid user data" });
                 }
             } catch (error) {
-                res.status(400).json({success: false, message: error.message});
+                res.status(401).send({ msg: "invalid user data (email-name)" });
             }
             break;
         default :

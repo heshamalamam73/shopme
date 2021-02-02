@@ -1,6 +1,4 @@
 import Layout from "../../components/layout/Layout";
-import HomePage from "../../components/home/HomePage";
-import Login from "../../components/login/Login";
 import styles from './signup.module.css'
 import {AiFillFacebook, AiOutlineShoppingCart} from "react-icons/ai";
 import Link from "next/link";
