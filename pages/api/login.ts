@@ -19,12 +19,18 @@ export default async (req, res) => {
                     email : req.body.email
                 });
                 if(user){
-                    let isMatch =await user.comparePassword(req.body.password);
+                    let isMatch = await user.comparePassword(req.body.password);
                     if(isMatch){
-                       const token = getToken(user)
-                        res.status(200).json({success : true , data: user , token :token ,  })
+                        res.status(200).send({
+                            success:true,
+                            _id: user._id,
+                            name: user.name,
+                            email: user.email,
+                            isAdmin: user.isAdmin,
+                            token: getToken(user),
+                        });
                     }else {
-                        res.status(400).json({success: false , message : "invalid email or password "});
+                        res.status(401).json({success: false , message : "invalid email or password "});
                     }
                 }else {
                     res.status(400).json({success: false , message : "invalid email or password "});

@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import {useState } from 'react'
-import HomePage from "../components/home/HomePage";
 import Layout from "../components/layout/Layout";
 import Aside from "../components/asidebar/Asidebar";
 import {useRouter} from "next/router";
@@ -29,7 +28,8 @@ export default function Home() {
               )}
                 {session  && (
                     <>
-                        signed in as {session.user.email}
+                        signed in as {session.user.name}
+                        {console.log(session)}
                         <br/>
                         <div>you can see the protect route</div>
                         <button onClick={signOut}>Sign out</button>
